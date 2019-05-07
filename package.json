@@ -9,8 +9,10 @@
   ],
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watchAll",
     "lint": "tslint -c tslint.json --project tsconfig.json \"src/**/*\" \"test/**/*\"",
-    "format": "prettier --write --loglevel=error \"src/**/*\" \"test/**/*\""
+    "format": "prettier --write --loglevel=error \"src/**/*\" \"test/**/*\"",
+    "cov": "jest --coverage"
   },
   "precommit": [
     "yarn format",
