@@ -1,0 +1,37 @@
+{
+  "name": "nodejs-logger",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Trendyol/nodejs-logger.git",
+  "contributors": [
+    "Cihad Horuzoglu <cihad.horuzoglu@trendyol.com>",
+    "Ismail Tekin <ismail.tekin@trendyol.com>"
+  ],
+  "scripts": {
+    "test": "jest",
+    "lint": "tslint -c tslint.json --project tsconfig.json \"src/**/*\" \"test/**/*\"",
+    "format": "prettier --write --loglevel=error \"src/**/*\" \"test/**/*\""
+  },
+  "precommit": [
+    "yarn format",
+    "yarn lint --fix",
+    "yarn test"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^24.0.12",
+    "@types/node": "^12.0.0",
+    "fixture-repository": "^1.2.0",
+    "jest": "^24.8.0",
+    "precommit": "^1.2.2",
+    "prettier": "^1.17.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.16.0",
+    "tslint-config-airbnb": "^5.11.1"
+  },
+  "dependencies": {
+    "graylog2": "^0.2.1",
+    "pino": "^5.12.3",
+    "typescript": "^3.4.5"
+  }
+}
