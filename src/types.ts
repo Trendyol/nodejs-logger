@@ -1,3 +1,5 @@
+import express from "express";
+
 interface GraylogConfig {
   hostname: string;
   host: string;
@@ -17,4 +19,17 @@ interface Adapter {
   warning: (log: AdapterLog) => void;
 }
 
-export { GraylogConfig, Adapter, AdapterLog };
+interface LogContext {
+  currentUrl?: string;
+  userId?: string|null;
+  userAgent?: string;
+  referrerUrl?: string;
+  correlationId?: string;
+}
+
+interface Request extends express.Request {
+  logContext?: LogContext
+  user?: any;
+}
+
+export { GraylogConfig, Adapter, AdapterLog, LogContext, Request };

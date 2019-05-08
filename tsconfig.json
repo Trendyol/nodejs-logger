@@ -12,7 +12,7 @@
     "emitDecoratorMetadata": true,
     "listEmittedFiles": true,
     "types": ["node", "jest"],
-    "typeRoots": ["src/types"]
+    "typeRoots": ["src/types/**"]
   },
   "exclude": ["*/**/node_modules", "*/**/test", "!node_modules/@types"],
   "include": ["./src"],
