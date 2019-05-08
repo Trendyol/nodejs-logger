@@ -4,7 +4,7 @@ module.exports = {
   coverageDirectory: 'coverage',
   collectCoverage: false,
   collectCoverageFrom: ['src/**/*.ts'],
-  coveragePathIgnorePatterns: [],
+  coveragePathIgnorePatterns: ['src/index.ts', 'src/types'],
   testPathIgnorePatterns: [],
   testEnvironment: 'node',
   globals: {
