@@ -1,4 +1,5 @@
 import express from 'express';
+import { Action } from './actions/actions';
 
 interface GraylogConfig {
   hostname: string;
@@ -10,21 +11,26 @@ interface GraylogConfig {
 
 interface AdapterLog {
   message: string;
-  meta: { [key: string]: string };
+  meta: Detail;
 }
 
 interface Adapter {
   info: (log: AdapterLog) => void;
   error: (log: AdapterLog) => void;
-  warning: (log: AdapterLog) => void;
+  warn: (log: AdapterLog) => void;
 }
 
-interface LogContext {
-  currentUrl?: string;
-  userId?: string | null;
-  userAgent?: string;
-  referrerUrl?: string;
-  correlationId?: string;
+interface LoggerProps {
+  adapter: Adapter;
+}
+
+interface RequestContext {
+  currentUrl: string;
+  userId?: string;
+  ip: string;
+  userAgent: string;
+  refererUrl: string;
+  correlationId: string;
 }
 
 interface Request extends express.Request {
@@ -32,4 +38,9 @@ interface Request extends express.Request {
   user?: any;
 }
 
-export { GraylogConfig, Adapter, AdapterLog, LogContext, Request };
+interface Detail extends RequestContext {
+  action: Action;
+  customAction?: string;
+}
+
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, RequestContext, Detail, Request };

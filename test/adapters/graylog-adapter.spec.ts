@@ -1,26 +1,17 @@
 import { GraylogAdapter } from '../../src/adapters/graylog-adapter';
-import { AdapterLog, GraylogConfig } from '../../src/types';
+import { AdapterLog, GraylogConfig, Adapter } from '../../src/types';
 import { random } from 'faker';
 import { graylog } from 'graylog2';
 import { createSandbox } from 'sinon';
+import fr from 'fixture-repository';
 
 const sandbox = createSandbox();
 
-const config: GraylogConfig = {
-  hostname: random.word(),
-  host: random.word(),
-  port: random.number({ min: 0, max: 100 }),
-  facility: random.word(),
-  bufferSize: random.number()
-};
-const log: AdapterLog = {
-  message: random.word(),
-  meta: {
-    some: random.word()
-  }
-};
+const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
 
-const adapter = new GraylogAdapter(config);
+const log: AdapterLog = fr.create('AdapterLog');
+
+const adapter: Adapter = new GraylogAdapter(config);
 
 describe('graylog adapter specs', () => {
   beforeEach(() => {
@@ -41,7 +32,7 @@ describe('graylog adapter specs', () => {
 
   it('should send warning log', () => {
     const stub = sandbox.stub(graylog.prototype, 'warning');
-    adapter.warning(log);
+    adapter.warn(log);
     expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
   });
 });

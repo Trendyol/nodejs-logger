@@ -1,3 +1,3 @@
 const fr = require('fixture-repository').default;
 
-fr.setup("./src/types.ts");
+fr.setup('./src/**/*.ts');
