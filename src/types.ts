@@ -1,3 +1,5 @@
+import { Action } from './actions/actions';
+
 interface GraylogConfig {
   hostname: string;
   host: string;
@@ -8,13 +10,31 @@ interface GraylogConfig {
 
 interface AdapterLog {
   message: string;
-  meta: { [key: string]: string };
+  meta: Detail;
 }
 
 interface Adapter {
   info: (log: AdapterLog) => void;
   error: (log: AdapterLog) => void;
-  warning: (log: AdapterLog) => void;
+  warn: (log: AdapterLog) => void;
 }
 
-export { GraylogConfig, Adapter, AdapterLog };
+interface LoggerProps {
+  adapter: Adapter;
+}
+
+interface RequestContext {
+  currentUrl: string;
+  userId?: string;
+  ip: string;
+  userAgent: string;
+  refererUrl: string;
+  correlationId: string;
+}
+
+interface Detail extends RequestContext {
+  action: Action;
+  customAction?: string;
+}
+
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, RequestContext, Detail };
