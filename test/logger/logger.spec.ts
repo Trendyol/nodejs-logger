@@ -1,5 +1,5 @@
 import { Logger } from '../../src/logger/logger';
-import { Adapter, GraylogConfig, RequestContext, Detail, AdapterLog } from '../../src/types';
+import { Adapter, GraylogConfig, LogContext, Detail, AdapterLog } from '../../src/types';
 import { GraylogAdapter } from '../../src/adapters/graylog-adapter';
 import fr from 'fixture-repository';
 import faker from 'faker';
@@ -11,7 +11,7 @@ const adapterConfig: GraylogConfig = { ...fr.create('GraylogConfig'), port: fake
 const adapter: Adapter = new GraylogAdapter(adapterConfig);
 const sandbox = createSandbox();
 
-const requestContext: RequestContext = fr.create('RequestContext');
+const requestContext: LogContext = fr.create('LogContext');
 const action: Action = fr.create('Action');
 const message: string = fr.create('string');
 const detail: Detail = fr.create('Detail');

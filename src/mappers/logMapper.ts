@@ -1,7 +1,7 @@
-import { RequestContext, Detail } from '../types';
+import { LogContext, Detail } from '../types';
 import { Action } from '../actions/actions';
 
-const mapLogDetail = (action: Action, requestContext: RequestContext) => {
+const mapLogDetail = (action: Action, requestContext: LogContext) => {
   const mapResult: Detail = {
     action: Action[action],
     currentUrl: requestContext.currentUrl,

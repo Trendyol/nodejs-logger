@@ -1,5 +1,5 @@
 import { mapLogDetail } from '../../src/mappers/logMapper';
-import { RequestContext } from '../../src/types';
+import { LogContext } from '../../src/types';
 import fr from 'fixture-repository';
 import { Action } from '../../src/actions/actions';
 
@@ -9,7 +9,7 @@ describe('logMapper specs', () => {
   });
 
   it('should map log properties correctly when action is not custom', () => {
-    const requestContext: RequestContext = fr.create('RequestContext');
+    const requestContext: LogContext = fr.create('LogContext');
     const action: Action = Action.PDA_GET_DETAIL;
 
     const result = mapLogDetail(action, requestContext);
@@ -18,7 +18,7 @@ describe('logMapper specs', () => {
   });
 
   it('should map log properties correctly when action is custom', () => {
-    const requestContext: RequestContext = fr.create('RequestContext');
+    const requestContext: LogContext = fr.create('LogContext');
     const action: string = fr.create('string');
 
     const result = mapLogDetail((action as unknown) as Action, requestContext);

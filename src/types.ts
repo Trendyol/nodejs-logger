@@ -1,3 +1,4 @@
+import express from 'express';
 import { Action } from './actions/actions';
 
 interface GraylogConfig {
@@ -23,18 +24,23 @@ interface LoggerProps {
   adapter: Adapter;
 }
 
-interface RequestContext {
-  currentUrl: string;
+interface LogContext {
+  currentUrl?: string;
   userId?: string;
-  ip: string;
-  userAgent: string;
-  refererUrl: string;
-  correlationId: string;
+  ip?: string;
+  userAgent?: string;
+  correlationId?: string;
+  refererUrl?: string;
 }
 
-interface Detail extends RequestContext {
+interface Request extends express.Request {
+  logContext?: LogContext;
+  user?: any;
+}
+
+interface Detail extends LogContext {
   action: Action;
   customAction?: string;
 }
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, RequestContext, Detail };
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request };
