@@ -1,4 +1,4 @@
-import express from "express";
+import express from 'express';
 
 interface GraylogConfig {
   hostname: string;
@@ -21,14 +21,14 @@ interface Adapter {
 
 interface LogContext {
   currentUrl?: string;
-  userId?: string|null;
+  userId?: string | null;
   userAgent?: string;
   referrerUrl?: string;
   correlationId?: string;
 }
 
 interface Request extends express.Request {
-  logContext?: LogContext
+  logContext?: LogContext;
   user?: any;
 }
 
