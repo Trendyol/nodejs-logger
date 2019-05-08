@@ -1227,10 +1227,10 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-fixture-repository@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/fixture-repository/-/fixture-repository-1.2.0.tgz#6e7273d34950df69613e1889a215fabfcbe051b9"
-  integrity sha512-Pm/CsKWA9UwTbyWOdwlYB8RmkoP+6oZPB9gRLk9jFlOU1Ms8HEpfCbnXG8WSXa8nyYyUnjj/7ZlGqT4tmgJ+Jw==
+fixture-repository@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/fixture-repository/-/fixture-repository-1.2.1.tgz#ed429c8c2ef8593f9bf7b34a6095f5c9d034c1cf"
+  integrity sha512-TjZ7WlyBji8uLhlgmAe14e/Q68lJghKBYC0xBX0WaGHn+HUKLrZLWFZHuXWBB5YdS7lfied7xRCnWEFeITXdKg==
   dependencies:
     faker "^4.1.0"
     glob "^7.1.3"
