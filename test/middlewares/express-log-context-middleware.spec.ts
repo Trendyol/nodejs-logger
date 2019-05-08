@@ -25,7 +25,7 @@ describe('express context middleware specs', () => {
     expect(req.logContext).toBeDefined();
     expect(req.logContext.currentUrl).toBe(req.originalUrl);
     expect(req.logContext.userAgent).toBe('user-agent');
-    expect(req.logContext.referrerUrl).toBe('referer');
+    expect(req.logContext.refererUrl).toBe('referer');
     expect(req.logContext.correlationId).toBe('x-correlation-id');
     expect(req.logContext.userId).toBe(req.user.id);
   });

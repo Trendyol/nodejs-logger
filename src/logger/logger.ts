@@ -1,4 +1,4 @@
-import { Adapter, LoggerProps, RequestContext } from '../types';
+import { Adapter, LoggerProps, LogContext } from '../types';
 import { mapLogDetail } from '../mappers/logMapper';
 import { Action } from '../actions/actions';
 
@@ -8,19 +8,19 @@ class Logger {
     this.adapter = props.adapter;
   }
 
-  public info(action: Action, message: string, requestContext: RequestContext) {
+  public info(action: Action, message: string, requestContext: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapter.info({ message, meta: logDetail });
   }
 
-  public error(action: Action, message: string, requestContext: RequestContext) {
+  public error(action: Action, message: string, requestContext: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapter.error({ message, meta: logDetail });
   }
 
-  public warn(action: Action, message: string, requestContext: RequestContext) {
+  public warn(action: Action, message: string, requestContext: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapter.warn({ message, meta: logDetail });

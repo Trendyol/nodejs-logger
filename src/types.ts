@@ -24,13 +24,13 @@ interface LoggerProps {
   adapter: Adapter;
 }
 
-interface RequestContext {
-  currentUrl: string;
+interface LogContext {
+  currentUrl?: string;
   userId?: string;
-  ip: string;
-  userAgent: string;
-  refererUrl: string;
-  correlationId: string;
+  ip?: string;
+  userAgent?: string;
+  correlationId?: string;
+  refererUrl?: string;
 }
 
 interface Request extends express.Request {
@@ -38,9 +38,9 @@ interface Request extends express.Request {
   user?: any;
 }
 
-interface Detail extends RequestContext {
+interface Detail extends LogContext {
   action: Action;
   customAction?: string;
 }
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, RequestContext, Detail, Request };
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request };

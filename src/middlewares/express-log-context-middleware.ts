@@ -6,7 +6,7 @@ const ExpressLogContextMiddleware = () => {
     req.logContext = {
       currentUrl: req.originalUrl,
       userAgent: req.header('user-agent'),
-      referrerUrl: req.header('referer'),
+      refererUrl: req.header('referer'),
       correlationId: req.header('x-correlation-id')
     };
 
