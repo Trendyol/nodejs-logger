@@ -18,7 +18,7 @@ class GraylogAdapter implements Adapter {
     this.graylog.error(log.message, log.meta);
   }
 
-  public warning(log: AdapterLog) {
+  public warn(log: AdapterLog) {
     this.graylog.warning(log.message, log.meta);
   }
 

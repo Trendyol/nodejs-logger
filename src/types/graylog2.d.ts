@@ -3,8 +3,8 @@ declare module 'graylog2' {
   export class graylog {
     constructor(config: any);
 
-    info(message: string, meta: { [key: string]: string }): void;
-    error(message: string, meta: { [key: string]: string }): void;
-    warning(message: string, meta: { [key: string]: string }): void;
+    info(message: string, meta: import('../types').Detail): void;
+    error(message: string, meta: import('../types').Detail): void;
+    warning(message: string, meta: import('../types').Detail): void;
   }
 }
