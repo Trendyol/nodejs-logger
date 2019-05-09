@@ -22,6 +22,10 @@ class GraylogAdapter implements Adapter {
     this.graylog.warning(log.message, log.meta);
   }
 
+  public debug(log: AdapterLog) {
+    this.graylog.debug(log.message, log.meta);
+  }
+
   private setup() {
     return new graylog({
       servers: [

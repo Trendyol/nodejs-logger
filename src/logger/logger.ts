@@ -25,6 +25,12 @@ class Logger {
 
     this.adapter.warn({ message, meta: logDetail });
   }
+
+  public debug(action: Action, message: string, requestContext: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
+
+    this.adapter.debug({ message, meta: logDetail });
+  }
 }
 
 export { Logger };

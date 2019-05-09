@@ -35,4 +35,10 @@ describe('graylog adapter specs', () => {
     adapter.warn(log);
     expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
   });
+
+  it('should send debug log', () => {
+    const stub = sandbox.stub(graylog.prototype, 'debug');
+    adapter.debug(log);
+    expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
+  });
 });
