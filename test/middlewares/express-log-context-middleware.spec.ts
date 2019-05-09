@@ -29,4 +29,16 @@ describe('express context middleware specs', () => {
     expect(req.logContext.correlationId).toBe('x-correlation-id');
     expect(req.logContext.userId).toBe(req.user.id);
   });
+
+  it('should create express context middleware without user info', () => {
+    const spy = sandbox.spy();
+    const req: any = {
+      originalUrl: random.word(),
+      header: sandbox.stub().returnsArg(0)
+    };
+    const middleware = ExpressLogContextMiddleware();
+    middleware(req, {}, spy);
+
+    expect(req.logContext.userId).toBeUndefined();
+  });
 });

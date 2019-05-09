@@ -1,9 +1,7 @@
 src/
 test/
 coverage/
-__tests__/
 tsconfig.json
 tslint.json
 .prettierrc
 jest.config.js
-.dockerignore
