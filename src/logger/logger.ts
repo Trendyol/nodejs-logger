@@ -1,4 +1,4 @@
-import { Adapter, LoggerProps, LogContext } from '../types';
+import {Adapter, LoggerProps, LogContext} from '../types';
 import { mapLogDetail } from '../mappers/logMapper';
 import { Action } from '../actions/actions';
 
@@ -24,6 +24,12 @@ class Logger {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapter.warn({ message, meta: logDetail });
+  }
+
+  public debug(action: Action, message: string, requestContext: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
+
+    this.adapter.debug({ message, meta: logDetail });
   }
 }
 

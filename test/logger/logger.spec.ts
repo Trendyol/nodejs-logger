@@ -75,4 +75,10 @@ describe('logger specs', () => {
 
     expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
   });
+
+  it('should call adapter.debug with correct properties from debug', () => {
+    logger.debug(action, message, requestContext);
+
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(true);
+  });
 });
