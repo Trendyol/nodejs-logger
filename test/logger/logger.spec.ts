@@ -3,7 +3,7 @@ import { Adapter, GraylogConfig, LogContext, Detail, AdapterLog } from '../../sr
 import { GraylogAdapter } from '../../src/adapters/graylog-adapter';
 import fr from 'fixture-repository';
 import faker from 'faker';
-import { createSandbox, SinonMock, SinonSpy, SinonStubbedInstance, SinonStub } from 'sinon';
+import { createSandbox, SinonStubbedInstance, SinonStub } from 'sinon';
 import * as mapper from '../../src/mappers/logMapper';
 import { Action } from '../../src/actions/actions';
 
@@ -29,7 +29,7 @@ describe('logger specs', () => {
   beforeEach(() => {
     mapperStub = sandbox.stub(mapper, 'mapLogDetail').returns(detail);
     mockAdapter = sandbox.stub(adapter);
-    logger = new Logger({ adapter: mockAdapter });
+    logger = new Logger({ adapters: [mockAdapter] });
   });
 
   afterEach(() => {

@@ -22,7 +22,7 @@ interface Adapter {
 }
 
 interface LoggerProps {
-  adapter: Adapter;
+  adapters: Adapter[];
 }
 
 interface LogContext {

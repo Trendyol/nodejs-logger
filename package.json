@@ -1,8 +1,10 @@
 {
   "name": "nodejs-logger",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "repository": "git@github.com:Trendyol/nodejs-logger.git",
+  "license": "MIT",
   "contributors": [
     "Cihad Horuzoglu <cihad.horuzoglu@trendyol.com>",
     "Ismail Tekin <ismail.tekin@trendyol.com>"
@@ -20,7 +22,6 @@
     "lint",
     "test"
   ],
-  "license": "MIT",
   "devDependencies": {
     "@types/express": "^4.16.1",
     "@types/faker": "^4.1.5",

@@ -14,5 +14,4 @@ node_modules
 dist/
 .idea
 .vscode
-client/dist/
 coverage/
