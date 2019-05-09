@@ -1,4 +1,4 @@
-import {Adapter, LoggerProps, LogContext} from '../types';
+import { Adapter, LoggerProps, LogContext } from '../types';
 import { mapLogDetail } from '../mappers/logMapper';
 import { Action } from '../actions/actions';
 
