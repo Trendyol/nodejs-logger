@@ -150,4 +150,18 @@ describe('logger specs', () => {
     expect(mockAdapter.info.calledWithExactly(log)).toBe(false);
     expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
   });
+
+  it('should only log error and warn levels when log level is meaningless', () => {
+    process.env.LOG_LEVEL = fr.create('string');
+
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(false);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
+  });
 });
