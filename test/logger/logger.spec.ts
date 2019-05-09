@@ -33,6 +33,7 @@ describe('logger specs', () => {
   });
 
   afterEach(() => {
+    process.env.LOG_LEVEL = 'debug';
     sandbox.verifyAndRestore();
   });
 
@@ -70,7 +71,7 @@ describe('logger specs', () => {
     expect(mapperStub.calledWithExactly(action, requestContext)).toBe(true);
   });
 
-  it('should call adapter.error with correct properties from warn', () => {
+  it('should call adapter.warn with correct properties from warn', () => {
     logger.warn(action, message, requestContext);
 
     expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
@@ -80,5 +81,73 @@ describe('logger specs', () => {
     logger.debug(action, message, requestContext);
 
     expect(mockAdapter.debug.calledWithExactly(log)).toBe(true);
+  });
+
+  it('should log all levels when log level is debug', () => {
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(true);
+  });
+
+  it('should log all levels except debug when log level is info', () => {
+    process.env.LOG_LEVEL = 'info';
+
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
+  });
+
+  it('should only log error and warn levels when log level is warn', () => {
+    process.env.LOG_LEVEL = 'warn';
+
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(false);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
+  });
+
+  it('should only log error level when log level is error', () => {
+    process.env.LOG_LEVEL = 'error';
+
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(false);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(false);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
+  });
+
+  it('should only log error and warn levels when log level is undefined', () => {
+    delete process.env.LOG_LEVEL;
+
+    logger.info(action, message, requestContext);
+    logger.debug(action, message, requestContext);
+    logger.warn(action, message, requestContext);
+    logger.error(action, message, requestContext);
+
+    expect(mockAdapter.error.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.warn.calledWithExactly(log)).toBe(true);
+    expect(mockAdapter.info.calledWithExactly(log)).toBe(false);
+    expect(mockAdapter.debug.calledWithExactly(log)).toBe(false);
   });
 });
