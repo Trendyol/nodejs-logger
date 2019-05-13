@@ -5,7 +5,7 @@ const mapLogDetail = (action: Action, requestContext?: LogContext) => {
   const actionName = Action[action];
 
   const mapResult: Detail = {
-    action: actionName,
+    action: actionName
   };
 
   if (requestContext) {
