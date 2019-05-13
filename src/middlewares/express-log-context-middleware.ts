@@ -18,4 +18,4 @@ const ExpressLogContextMiddleware = () => {
   };
 };
 
-module.exports = ExpressLogContextMiddleware;
+export { ExpressLogContextMiddleware };

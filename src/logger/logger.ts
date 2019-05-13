@@ -15,7 +15,7 @@ class Logger {
     this.adapters = props.adapters;
   }
 
-  public info(action: Action, message: string, requestContext: LogContext) {
+  public info(action: Action, message: string, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -23,7 +23,7 @@ class Logger {
     );
   }
 
-  public error(action: Action, message: string, requestContext: LogContext) {
+  public error(action: Action, message: string, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -31,7 +31,7 @@ class Logger {
     );
   }
 
-  public warn(action: Action, message: string, requestContext: LogContext) {
+  public warn(action: Action, message: string, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -39,7 +39,7 @@ class Logger {
     );
   }
 
-  public debug(action: Action, message: string, requestContext: LogContext) {
+  public debug(action: Action, message: string, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
