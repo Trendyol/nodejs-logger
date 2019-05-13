@@ -44,4 +44,13 @@ interface Detail extends LogContext {
   customAction?: string;
 }
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request };
+enum LogLevel {
+  error = 'error',
+  warn = 'warn',
+  info = 'info',
+  debug = 'debug'
+}
+
+type LevelMap = { [Tkey in LogLevel]: number };
+
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap };
