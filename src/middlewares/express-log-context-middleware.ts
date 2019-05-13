@@ -7,7 +7,13 @@ const ExpressLogContextMiddleware = () => {
       currentUrl: req.originalUrl,
       userAgent: req.header('user-agent'),
       refererUrl: req.header('referer'),
-      correlationId: req.header('x-correlation-id')
+      correlationId: req.header('x-correlation-id') || req.header('x-correlationid'),
+      ip:
+        req.header('X-Client-IP') ||
+        req.header('CF-Connecting-IP') ||
+        req.header('Client-IP') ||
+        req.header('x-real-ip') ||
+        req.ip
     };
 
     if (req.user) {

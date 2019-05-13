@@ -7,6 +7,13 @@ class GraylogAdapter implements Adapter {
 
   constructor(config: GraylogConfig) {
     this.config = config;
+
+    this.info = this.info.bind(this);
+    this.error = this.error.bind(this);
+    this.warn = this.warn.bind(this);
+    this.debug = this.debug.bind(this);
+    this.setup = this.setup.bind(this);
+
     this.graylog = this.setup();
   }
 
@@ -36,7 +43,7 @@ class GraylogAdapter implements Adapter {
       ],
       hostname: this.config.hostname,
       facility: this.config.facility,
-      bufferSize: this.config.bufferSize
+      bufferSize: this.config.bufferSize || 1400
     });
   }
 }

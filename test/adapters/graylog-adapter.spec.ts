@@ -18,6 +18,14 @@ describe('graylog adapter specs', () => {
     sandbox.verifyAndRestore();
   });
 
+  it('should create adapter with default buffer size', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.bufferSize;
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter).toBeDefined();
+  });
+
   it('should send info log', () => {
     const stub = sandbox.stub(graylog.prototype, 'info');
     adapter.info(log);

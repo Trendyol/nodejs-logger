@@ -15,7 +15,7 @@
     "lint": "tslint -c tslint.json --project tsconfig.json \"src/**/*\" \"test/**/*\" --fix",
     "format": "prettier --write --loglevel=error \"src/**/*\" \"test/**/*\"",
     "cov": "jest --coverage",
-    "build": "TS_NODE_FILES=true node_modules/.bin/tsc"
+    "build": "tsc"
   },
   "pre-commit": [
     "format",

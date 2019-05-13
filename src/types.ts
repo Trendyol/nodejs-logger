@@ -6,7 +6,7 @@ interface GraylogConfig {
   host: string;
   port: number;
   facility: string;
-  bufferSize: number;
+  bufferSize?: number;
 }
 
 interface AdapterLog {
