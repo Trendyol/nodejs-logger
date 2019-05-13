@@ -10,7 +10,7 @@ interface GraylogConfig {
 }
 
 interface AdapterLog {
-  message: string;
+  message: string | object;
   meta: Detail;
 }
 

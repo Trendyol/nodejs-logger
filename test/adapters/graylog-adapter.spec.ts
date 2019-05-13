@@ -8,8 +8,7 @@ import fr from 'fixture-repository';
 const sandbox = createSandbox();
 
 const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
-
-const log: AdapterLog = fr.create('AdapterLog');
+const log: AdapterLog = { meta: fr.create('Detail'), message: {} };
 
 const adapter: Adapter = new GraylogAdapter(config);
 

@@ -15,35 +15,35 @@ class Logger {
     this.adapters = props.adapters;
   }
 
-  public info(action: Action, message: any, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public info(action: Action, message: string | object, requestContext?: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.info, { message: logDetail.message, meta: logDetail.meta }, LogLevel.info)
+      this.sendLog(adapter.info, { message, meta: logDetail }, LogLevel.info)
     );
   }
 
-  public error(action: Action, message: any, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public error(action: Action, message: string | object, requestContext?: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.error, { message: logDetail.message, meta: logDetail.meta }, LogLevel.error)
+      this.sendLog(adapter.error, { message, meta: logDetail }, LogLevel.error)
     );
   }
 
-  public warn(action: Action, message: any, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public warn(action: Action, message: string | object, requestContext?: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.warn, { message: logDetail.message, meta: logDetail.meta }, LogLevel.warn)
+      this.sendLog(adapter.warn, { message, meta: logDetail }, LogLevel.warn)
     );
   }
 
-  public debug(action: Action, message: any, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public debug(action: Action, message: string | object, requestContext?: LogContext) {
+    const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.debug, { message: logDetail.message, meta: logDetail.meta }, LogLevel.debug)
+      this.sendLog(adapter.debug, { message, meta: logDetail }, LogLevel.debug)
     );
   }
 
