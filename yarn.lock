@@ -1321,10 +1321,10 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
-fixture-repository@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/fixture-repository/-/fixture-repository-1.2.0.tgz#6e7273d34950df69613e1889a215fabfcbe051b9"
-  integrity sha512-Pm/CsKWA9UwTbyWOdwlYB8RmkoP+6oZPB9gRLk9jFlOU1Ms8HEpfCbnXG8WSXa8nyYyUnjj/7ZlGqT4tmgJ+Jw==
+fixture-repository@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/fixture-repository/-/fixture-repository-1.2.2.tgz#316d5a9a7313fcbd13f79f7cbfbabfc46848c563"
+  integrity sha512-9obXLIJNlmIkecnvzQ9HEmqXSSkklBVs9ukgfc45E0eAL8TIkdFtSaM5mvwovynqgkJHGmg828Sev0ui1yAEmw==
   dependencies:
     faker "^4.1.0"
     glob "^7.1.3"
