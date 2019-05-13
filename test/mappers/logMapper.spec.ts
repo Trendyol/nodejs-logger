@@ -10,7 +10,7 @@ describe('logMapper specs', () => {
 
   it('should map log properties correctly when action is not custom', () => {
     const requestContext: LogContext = fr.create('LogContext');
-    const action: Action = Action.PDA_GET_DETAIL;
+    const action: Action = Action.FAVORITE_API_ADD_FAVORITE;
 
     const result = mapLogDetail(action, requestContext);
 

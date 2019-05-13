@@ -1,4 +1,4 @@
-const ExpressLogContextMiddleware = require('../../src/middlewares/express-log-context-middleware');
+import { ExpressLogContextMiddleware } from '../../src/middlewares/express-log-context-middleware';
 import { random } from 'faker';
 import { createSandbox } from 'sinon';
 
