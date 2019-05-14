@@ -8,14 +8,21 @@ import fr from 'fixture-repository';
 const sandbox = createSandbox();
 
 const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
-
-const log: AdapterLog = fr.create('AdapterLog');
+const log: AdapterLog = { meta: fr.create('Detail'), message: {} };
 
 const adapter: Adapter = new GraylogAdapter(config);
 
 describe('graylog adapter specs', () => {
   beforeEach(() => {
     sandbox.verifyAndRestore();
+  });
+
+  it('should create adapter with default buffer size', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.bufferSize;
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter).toBeDefined();
   });
 
   it('should send info log', () => {

@@ -6,11 +6,11 @@ interface GraylogConfig {
   host: string;
   port: number;
   facility: string;
-  bufferSize: number;
+  bufferSize?: number;
 }
 
 interface AdapterLog {
-  message: string;
+  message: string | object;
   meta: Detail;
 }
 
@@ -53,4 +53,6 @@ enum LogLevel {
 
 type LevelMap = { [Tkey in LogLevel]: number };
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap };
+type Message = string | object;
+
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap, Message };

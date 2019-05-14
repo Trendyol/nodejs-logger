@@ -5,7 +5,7 @@ import fr from 'fixture-repository';
 
 const sandbox = createSandbox();
 
-const log: AdapterLog = fr.create('AdapterLog');
+const log: AdapterLog = { meta: fr.create('Detail'), message: {} };
 
 const adapter: Adapter = new ConsoleAdapter();
 

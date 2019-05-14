@@ -43,4 +43,6 @@ enum Action {
   CUSTOM = 'CUSTOM'
 }
 
-export { Action };
+type ActionType = Action | string;
+
+export { Action, ActionType };

@@ -1,7 +1,7 @@
 import { mapLogDetail } from '../../src/mappers/logMapper';
 import { LogContext } from '../../src/types';
 import fr from 'fixture-repository';
-import { Action } from '../../src/actions/actions';
+import { Action, Event } from '../../src/actions/actions';
 
 describe('logMapper specs', () => {
   it('should create an instance of logMapper', () => {
@@ -24,5 +24,13 @@ describe('logMapper specs', () => {
     const result = mapLogDetail((action as unknown) as Action, requestContext);
 
     expect(result).toEqual({ customAction: action, action: Action.CUSTOM, ...requestContext });
+  });
+
+  it('should map log properties correctly when logContext undefined', () => {
+    const action: string = fr.create('string');
+
+    const result = mapLogDetail((action as unknown) as Action);
+
+    expect(result).toEqual({ customAction: action, action: Action.CUSTOM });
   });
 });
