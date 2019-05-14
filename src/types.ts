@@ -53,4 +53,6 @@ enum LogLevel {
 
 type LevelMap = { [Tkey in LogLevel]: number };
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap };
+type Message = string | object;
+
+export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap, Message };

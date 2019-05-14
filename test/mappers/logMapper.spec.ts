@@ -1,7 +1,7 @@
 import { mapLogDetail } from '../../src/mappers/logMapper';
 import { LogContext } from '../../src/types';
 import fr from 'fixture-repository';
-import { Action } from '../../src/actions/actions';
+import { Action, Event } from '../../src/actions/actions';
 
 describe('logMapper specs', () => {
   it('should create an instance of logMapper', () => {

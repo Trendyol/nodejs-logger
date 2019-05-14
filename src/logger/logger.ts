@@ -1,4 +1,4 @@
-import { Adapter, LoggerProps, LogContext, AdapterLog, LevelMap, LogLevel } from '../types';
+import { Adapter, LoggerProps, LogContext, AdapterLog, LevelMap, LogLevel, Message } from '../types';
 import { mapLogDetail } from '../mappers/logMapper';
 import { Action } from '../actions/actions';
 
@@ -15,7 +15,7 @@ class Logger {
     this.adapters = props.adapters;
   }
 
-  public info(action: Action, message: string | object, requestContext?: LogContext) {
+  public info(action: Action, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -23,7 +23,7 @@ class Logger {
     );
   }
 
-  public error(action: Action, message: string | object, requestContext?: LogContext) {
+  public error(action: Action, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -31,7 +31,7 @@ class Logger {
     );
   }
 
-  public warn(action: Action, message: string | object, requestContext?: LogContext) {
+  public warn(action: Action, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
@@ -39,7 +39,7 @@ class Logger {
     );
   }
 
-  public debug(action: Action, message: string | object, requestContext?: LogContext) {
+  public debug(action: Action, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) =>
