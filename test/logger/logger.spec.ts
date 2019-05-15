@@ -4,7 +4,7 @@ import { GraylogAdapter } from '../../src/adapters/graylog-adapter';
 import fr from 'fixture-repository';
 import faker from 'faker';
 import { createSandbox, SinonStubbedInstance, SinonStub } from 'sinon';
-import * as mapper from '../../src/mappers/logMapper';
+import * as mapper from '../../src/mappers/log-mapper';
 import { Action } from '../../src/actions/actions';
 
 const adapterConfig: GraylogConfig = { ...fr.create('GraylogConfig'), port: faker.random.number({ min: 0, max: 100 }) };

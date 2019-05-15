@@ -1,6 +1,6 @@
 import { Adapter, LoggerProps, LogContext, AdapterLog, LevelMap, LogLevel, Message } from '../types';
-import { mapLogDetail } from '../mappers/logMapper';
-import { Action, ActionType } from '../actions/actions';
+import { mapLogDetail } from '../mappers/log-mapper';
+import { ActionType } from '../actions/actions';
 
 const logLevels: LevelMap = {
   [LogLevel.error]: 3,
