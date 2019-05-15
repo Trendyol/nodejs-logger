@@ -28,12 +28,15 @@ describe('logMapper specs', () => {
     expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext } });
   });
 
-  it('should map log properties correctly when logContext undefined', () => {
+  it('should map log properties correctly when logContext undefined with object message', () => {
     const action: string = fr.create('string');
-    const message: Message = fr.create('string');
+    const message: Message = {
+      test: fr.create('string')
+    };
+    const stringMessage = JSON.stringify(message);
 
     const result = mapLogDetail(message, (action as unknown) as Action);
 
-    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM } });
+    expect(result).toEqual({ message: stringMessage, meta: { customAction: action, action: Action.CUSTOM } });
   });
 });
