@@ -16,35 +16,27 @@ class Logger {
   }
 
   public info(action: Action, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(action, requestContext);
+    const logDetail = mapLogDetail(message, action, requestContext);
 
-    this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.info, { message, meta: logDetail }, LogLevel.info)
-    );
+    this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.info, logDetail, LogLevel.info));
   }
 
   public error(action: Action, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(action, requestContext);
+    const logDetail = mapLogDetail(message, action, requestContext);
 
-    this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.error, { message, meta: logDetail }, LogLevel.error)
-    );
+    this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.error, logDetail, LogLevel.error));
   }
 
   public warn(action: Action, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(action, requestContext);
+    const logDetail = mapLogDetail(message, action, requestContext);
 
-    this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.warn, { message, meta: logDetail }, LogLevel.warn)
-    );
+    this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.warn, logDetail, LogLevel.warn));
   }
 
   public debug(action: Action, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(action, requestContext);
+    const logDetail = mapLogDetail(message, action, requestContext);
 
-    this.adapters.forEach((adapter: Adapter) =>
-      this.sendLog(adapter.debug, { message, meta: logDetail }, LogLevel.debug)
-    );
+    this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.debug, logDetail, LogLevel.debug));
   }
 
   private getLogLevel() {
