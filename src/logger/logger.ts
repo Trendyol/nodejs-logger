@@ -1,6 +1,6 @@
 import { Adapter, LoggerProps, LogContext, AdapterLog, LevelMap, LogLevel, Message } from '../types';
 import { mapLogDetail } from '../mappers/logMapper';
-import { Action } from '../actions/actions';
+import { Action, ActionType } from '../actions/actions';
 
 const logLevels: LevelMap = {
   [LogLevel.error]: 3,
@@ -15,25 +15,25 @@ class Logger {
     this.adapters = props.adapters;
   }
 
-  public info(action: Action, message: Message, requestContext?: LogContext) {
+  public info(action: ActionType, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.info, logDetail, LogLevel.info));
   }
 
-  public error(action: Action, message: Message, requestContext?: LogContext) {
+  public error(action: ActionType, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.error, logDetail, LogLevel.error));
   }
 
-  public warn(action: Action, message: Message, requestContext?: LogContext) {
+  public warn(action: ActionType, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.warn, logDetail, LogLevel.warn));
   }
 
-  public debug(action: Action, message: Message, requestContext?: LogContext) {
+  public debug(action: ActionType, message: Message, requestContext?: LogContext) {
     const logDetail = mapLogDetail(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.debug, logDetail, LogLevel.debug));
