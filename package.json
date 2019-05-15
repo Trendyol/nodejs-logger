@@ -36,11 +36,10 @@
     "sinon": "^7.3.2",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
+    "typescript": "^3.4.5",
     "tslint-config-airbnb": "^5.11.1"
   },
   "dependencies": {
-    "graylog2": "^0.2.1",
-    "pino": "^5.12.3",
-    "typescript": "^3.4.5"
+    "graylog2": "^0.2.1"
   }
 }
