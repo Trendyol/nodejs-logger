@@ -27,7 +27,7 @@ describe('logger specs', () => {
   let mockAdapter: SinonStubbedInstance<Adapter>;
 
   beforeEach(() => {
-    mapperStub = sandbox.stub(mapper, 'mapLogDetail').returns(detail);
+    mapperStub = sandbox.stub(mapper, 'mapLogDetail').returns(log);
     mockAdapter = sandbox.stub(adapter);
     logger = new Logger({ adapters: [mockAdapter] });
   });
@@ -43,8 +43,10 @@ describe('logger specs', () => {
 
   it('should call mapper with correct properties from info', () => {
     logger.info(action, message, requestContext);
+    process.env.LOG_LEVEL = 'info';
 
-    expect(mapperStub.calledWithExactly(action, requestContext)).toBe(true);
+    expect(mapperStub.calledWithExactly(message, action, requestContext)).toBe(true);
+    delete process.env.LOG_LEVEL;
   });
 
   it('should call adapter.info with correct properties from info', () => {
@@ -56,7 +58,7 @@ describe('logger specs', () => {
   it('should call mapper with correct properties from error', () => {
     logger.error(action, message, requestContext);
 
-    expect(mapperStub.calledWithExactly(action, requestContext)).toBe(true);
+    expect(mapperStub.calledWithExactly(message, action, requestContext)).toBe(true);
   });
 
   it('should call adapter.error with correct properties from error', () => {
@@ -68,7 +70,7 @@ describe('logger specs', () => {
   it('should call mapper with correct properties from warn', () => {
     logger.warn(action, message, requestContext);
 
-    expect(mapperStub.calledWithExactly(action, requestContext)).toBe(true);
+    expect(mapperStub.calledWithExactly(message, action, requestContext)).toBe(true);
   });
 
   it('should call adapter.warn with correct properties from warn', () => {
@@ -84,6 +86,7 @@ describe('logger specs', () => {
   });
 
   it('should log all levels when log level is debug', () => {
+    process.env.LOG_LEVEL = 'debug';
     logger.info(action, message, requestContext);
     logger.debug(action, message, requestContext);
     logger.warn(action, message, requestContext);

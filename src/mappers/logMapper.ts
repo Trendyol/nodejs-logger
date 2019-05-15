@@ -1,12 +1,14 @@
-import { LogContext, Detail } from '../types';
+import {LogContext, Detail, Message, AdapterLog} from '../types';
 import { Action, ActionType } from '../actions/actions';
 
-const mapLogDetail = (action: ActionType, requestContext?: LogContext) => {
+const mapLogDetail = (message: Message, action: ActionType, requestContext?: LogContext): AdapterLog => {
   const actionName = Action[action as Action];
 
   const mapResult: Detail = {
     action: actionName
   };
+
+  let mappedMessage = message;
 
   if (requestContext) {
     mapResult.currentUrl = requestContext.currentUrl;
@@ -22,7 +24,11 @@ const mapLogDetail = (action: ActionType, requestContext?: LogContext) => {
     mapResult.customAction = action;
   }
 
-  return mapResult;
+  if (typeof message !== 'string') {
+    mappedMessage = JSON.stringify(message);
+  }
+
+  return { meta: mapResult, message: mappedMessage };
 };
 
 export { mapLogDetail };

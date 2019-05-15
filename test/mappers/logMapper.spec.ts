@@ -1,7 +1,7 @@
 import { mapLogDetail } from '../../src/mappers/logMapper';
-import { LogContext } from '../../src/types';
+import {LogContext, Message} from '../../src/types';
 import fr from 'fixture-repository';
-import { Action, Event } from '../../src/actions/actions';
+import { Action } from '../../src/actions/actions';
 
 describe('logMapper specs', () => {
   it('should create an instance of logMapper', () => {
@@ -11,26 +11,29 @@ describe('logMapper specs', () => {
   it('should map log properties correctly when action is not custom', () => {
     const requestContext: LogContext = fr.create('LogContext');
     const action: Action = Action.FAVORITE_API_ADD_FAVORITE;
+    const message: Message = fr.create('string');
 
-    const result = mapLogDetail(action, requestContext);
+    const result = mapLogDetail(message, action, requestContext);
 
-    expect(result).toEqual({ action, ...requestContext });
+    expect(result).toEqual({message, meta: { action, ...requestContext }});
   });
 
   it('should map log properties correctly when action is custom', () => {
     const requestContext: LogContext = fr.create('LogContext');
     const action: string = fr.create('string');
+    const message: Message = fr.create('string');
 
-    const result = mapLogDetail((action as unknown) as Action, requestContext);
+    const result = mapLogDetail(message, (action as unknown) as Action, requestContext);
 
-    expect(result).toEqual({ customAction: action, action: Action.CUSTOM, ...requestContext });
+    expect(result).toEqual({message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext }});
   });
 
   it('should map log properties correctly when logContext undefined', () => {
     const action: string = fr.create('string');
+    const message: Message = fr.create('string');
 
-    const result = mapLogDetail((action as unknown) as Action);
+    const result = mapLogDetail(message, (action as unknown) as Action);
 
-    expect(result).toEqual({ customAction: action, action: Action.CUSTOM });
+    expect(result).toEqual({message, meta: { customAction: action, action: Action.CUSTOM }});
   });
 });
