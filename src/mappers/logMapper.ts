@@ -1,4 +1,4 @@
-import {LogContext, Detail, Message, AdapterLog} from '../types';
+import { LogContext, Detail, Message, AdapterLog } from '../types';
 import { Action, ActionType } from '../actions/actions';
 
 const mapLogDetail = (message: Message, action: ActionType, requestContext?: LogContext): AdapterLog => {

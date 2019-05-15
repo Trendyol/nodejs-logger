@@ -1,5 +1,5 @@
 import { mapLogDetail } from '../../src/mappers/logMapper';
-import {LogContext, Message} from '../../src/types';
+import { LogContext, Message } from '../../src/types';
 import fr from 'fixture-repository';
 import { Action } from '../../src/actions/actions';
 
@@ -15,7 +15,7 @@ describe('logMapper specs', () => {
 
     const result = mapLogDetail(message, action, requestContext);
 
-    expect(result).toEqual({message, meta: { action, ...requestContext }});
+    expect(result).toEqual({ message, meta: { action, ...requestContext } });
   });
 
   it('should map log properties correctly when action is custom', () => {
@@ -25,7 +25,7 @@ describe('logMapper specs', () => {
 
     const result = mapLogDetail(message, (action as unknown) as Action, requestContext);
 
-    expect(result).toEqual({message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext }});
+    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext } });
   });
 
   it('should map log properties correctly when logContext undefined', () => {
@@ -34,6 +34,6 @@ describe('logMapper specs', () => {
 
     const result = mapLogDetail(message, (action as unknown) as Action);
 
-    expect(result).toEqual({message, meta: { customAction: action, action: Action.CUSTOM }});
+    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM } });
   });
 });
