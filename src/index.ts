@@ -4,7 +4,7 @@ import { ExpressLogContextMiddleware } from './middlewares/express-log-context-m
 import { Logger } from './logger/logger';
 import { Action } from './actions/actions';
 
-export = {
+export {
   GraylogAdapter,
   ConsoleAdapter,
   ExpressLogContextMiddleware,
