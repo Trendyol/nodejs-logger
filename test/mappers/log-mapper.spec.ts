@@ -1,4 +1,4 @@
-import { mapLogDetail } from '../../src/mappers/logMapper';
+import { mapLogDetail } from '../../src/mappers/log-mapper';
 import { LogContext, Message } from '../../src/types';
 import fr from 'fixture-repository';
 import { Action } from '../../src/actions/actions';
