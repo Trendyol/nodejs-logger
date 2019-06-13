@@ -5,4 +5,13 @@ import { Logger } from './logger/logger';
 import { Action } from './actions/actions';
 import { LogContext, Request, GraylogConfig } from './types';
 
-export { GraylogAdapter, ConsoleAdapter, ExpressLogContextMiddleware, Logger, Action, LogContext, Request, GraylogConfig };
+export {
+  GraylogAdapter,
+  ConsoleAdapter,
+  ExpressLogContextMiddleware,
+  Logger,
+  Action,
+  LogContext,
+  Request,
+  GraylogConfig
+};
