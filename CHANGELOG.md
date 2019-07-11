@@ -5,8 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.1.3] - 2019-07-05
+## [1.1.4] - 2019-07-05
+
 ### Added
+
+- `USER_API_CREATE_USER_WITH_ONLY_PASSWORD` action added
+
+## [1.1.3] - 2019-07-05
+
+### Added
+
 - `AUTHENTICATION_API_GET_ACCESS_TOKEN` action added
 
 ### Added
