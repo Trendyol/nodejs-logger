@@ -35,7 +35,7 @@ interface LogContext {
 }
 
 interface Request extends express.Request {
-  logContext?: LogContext;
+  logContext: LogContext;
   user?: any;
 }
 
