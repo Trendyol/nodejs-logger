@@ -19,6 +19,8 @@ interface Adapter {
   error: (log: AdapterLog) => void;
   warn: (log: AdapterLog) => void;
   debug: (log: AdapterLog) => void;
+
+  validate: () => boolean;
 }
 
 interface LoggerProps {

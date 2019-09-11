@@ -33,6 +33,10 @@ class GraylogAdapter implements Adapter {
     this.graylog.debug(log.message, log.meta);
   }
 
+  public validate() {
+    return this.config.facility && this.config.host && this.config.hostname && this.config.port ? true : false;
+  }
+
   private setup() {
     return new graylog({
       servers: [
