@@ -12,7 +12,7 @@ const logLevels: LevelMap = {
 class Logger {
   private adapters: Adapter[];
   constructor(props: LoggerProps) {
-    this.adapters = props.adapters;
+    this.adapters = props.adapters.filter(adapter => adapter.validate());
   }
 
   public info(action: ActionType, message: Message, requestContext?: LogContext) {

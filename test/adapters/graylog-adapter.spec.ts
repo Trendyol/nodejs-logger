@@ -48,4 +48,48 @@ describe('graylog adapter specs', () => {
     adapter.debug(log);
     expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
   });
+
+  it('validate should return true', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter.validate()).toBe(true);
+  });
+
+  it('validate should return false if facility not given', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.facility;
+
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter.validate()).toBe(false);
+  });
+
+  it('validate should return false if hostname not given', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.hostname;
+
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter.validate()).toBe(false);
+  });
+
+  it('validate should return false if host not given', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.host;
+
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter.validate()).toBe(false);
+  });
+
+  it('validate should return false if port not given', () => {
+    const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
+    delete config.port;
+
+    const adapter: Adapter = new GraylogAdapter(config);
+
+    expect(adapter.validate()).toBe(false);
+  });
 });

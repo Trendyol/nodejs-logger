@@ -29,6 +29,9 @@ describe('logger specs', () => {
   beforeEach(() => {
     mapperStub = sandbox.stub(mapper, 'mapLogDetail').returns(log);
     mockAdapter = sandbox.stub(adapter);
+
+    mockAdapter.validate.returns(true);
+
     logger = new Logger({ adapters: [mockAdapter] });
   });
 
