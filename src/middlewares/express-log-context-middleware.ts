@@ -1,7 +1,12 @@
 import express from 'express';
-import { Request } from '../types';
+import { Request, ExpressLogContextMiddlewareOptions } from '../types';
+import uuid from 'uuid/v4';
 
-const ExpressLogContextMiddleware = () => {
+const defaultOptions: ExpressLogContextMiddlewareOptions = {
+  generateCorrelationId: false
+};
+
+const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions = defaultOptions) => {
   return (req: Request, res: express.Response, next: express.NextFunction) => {
     req.logContext = {
       currentUrl: req.originalUrl,
@@ -18,6 +23,10 @@ const ExpressLogContextMiddleware = () => {
 
     if (req.user) {
       req.logContext.userId = req.user.id;
+    }
+
+    if (options.generateCorrelationId && !req.logContext.correlationId) {
+      req.logContext.correlationId = uuid();
     }
 
     next();

@@ -57,4 +57,20 @@ type LevelMap = { [Tkey in LogLevel]: number };
 
 type Message = string | object;
 
-export { GraylogConfig, Adapter, AdapterLog, LoggerProps, LogContext, Detail, Request, LogLevel, LevelMap, Message };
+interface ExpressLogContextMiddlewareOptions {
+  generateCorrelationId?: boolean;
+}
+
+export {
+  GraylogConfig,
+  Adapter,
+  AdapterLog,
+  LoggerProps,
+  LogContext,
+  Detail,
+  Request,
+  LogLevel,
+  LevelMap,
+  Message,
+  ExpressLogContextMiddlewareOptions
+};

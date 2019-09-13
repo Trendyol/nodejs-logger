@@ -116,4 +116,20 @@ describe('express context middleware specs', () => {
 
     expect(req.logContext.ip).toBe(req.ip);
   });
+
+  it('should create express context middleware with random correlationId', () => {
+    const spy = sandbox.spy();
+    const middlewareOptions = {
+      generateCorrelationId: true
+    };
+
+    const req: any = {
+      header: () => undefined
+    };
+
+    const middleware = ExpressLogContextMiddleware(middlewareOptions);
+    middleware(req, {}, spy);
+
+    expect(typeof req.logContext.correlationId).toBe('string');
+  });
 });

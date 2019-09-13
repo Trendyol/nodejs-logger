@@ -1,6 +1,6 @@
 {
   "name": "ty-nodejs-logger",
-  "version": "1.1.8",
+  "version": "1.2.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": "git@github.com:Trendyol/nodejs-logger.git",
@@ -27,6 +27,7 @@
     "@types/faker": "^4.1.5",
     "@types/jest": "^24.0.12",
     "@types/node": "^12.0.0",
+    "@types/uuid": "^3.4.5",
     "@types/sinon": "^7.0.13",
     "faker": "^4.1.0",
     "fixture-repository": "^1.2.2",
@@ -36,10 +37,11 @@
     "sinon": "^7.3.2",
     "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
-    "typescript": "^3.4.5",
-    "tslint-config-airbnb": "^5.11.1"
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.4.5"
   },
   "dependencies": {
-    "graylog2": "^0.2.1"
+    "graylog2": "^0.2.1",
+    "uuid": "^3.3.3"
   }
 }

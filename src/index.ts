@@ -3,7 +3,7 @@ import { ConsoleAdapter } from './adapters/console-adapter';
 import { ExpressLogContextMiddleware } from './middlewares/express-log-context-middleware';
 import { Logger } from './logger/logger';
 import { Action } from './actions/actions';
-import { LogContext, Request, GraylogConfig } from './types';
+import { LogContext, Request, GraylogConfig, ExpressLogContextMiddlewareOptions } from './types';
 
 export {
   GraylogAdapter,
@@ -13,5 +13,6 @@ export {
   Action,
   LogContext,
   Request,
-  GraylogConfig
+  GraylogConfig,
+  ExpressLogContextMiddlewareOptions
 };
