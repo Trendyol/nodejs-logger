@@ -1,6 +1,5 @@
 import { Adapter, LoggerProps, LogContext, AdapterLog, LevelMap, LogLevel, Message } from '../types';
-import { mapLogDetail } from '../mappers/log-mapper';
-import { ActionType } from '../actions/actions';
+import LogMapper from '../mappers/log-mapper';
 
 const logLevels: LevelMap = {
   [LogLevel.error]: 3,
@@ -11,30 +10,32 @@ const logLevels: LevelMap = {
 
 class Logger {
   private adapters: Adapter[];
+  private mapper: LogMapper;
   constructor(props: LoggerProps) {
     this.adapters = props.adapters.filter(adapter => adapter.validate());
+    this.mapper = new LogMapper(props.actions);
   }
 
-  public info(action: ActionType, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public info(action: string, message: Message, requestContext?: LogContext) {
+    const logDetail = this.mapper.map(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.info, logDetail, LogLevel.info));
   }
 
-  public error(action: ActionType, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public error(action: string, message: Message, requestContext?: LogContext) {
+    const logDetail = this.mapper.map(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.error, logDetail, LogLevel.error));
   }
 
-  public warn(action: ActionType, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public warn(action: string, message: Message, requestContext?: LogContext) {
+    const logDetail = this.mapper.map(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.warn, logDetail, LogLevel.warn));
   }
 
-  public debug(action: ActionType, message: Message, requestContext?: LogContext) {
-    const logDetail = mapLogDetail(message, action, requestContext);
+  public debug(action: string, message: Message, requestContext?: LogContext) {
+    const logDetail = this.mapper.map(message, action, requestContext);
 
     this.adapters.forEach((adapter: Adapter) => this.sendLog(adapter.debug, logDetail, LogLevel.debug));
   }
