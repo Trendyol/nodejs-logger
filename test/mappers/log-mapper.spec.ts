@@ -6,7 +6,7 @@ import { UNKNOWN_ACTION } from '../../src/actions/actions';
 const knownAction = fr.create('string');
 
 const actions = {
-  knownAction
+  action: knownAction
 };
 
 describe('logMapper specs', () => {
@@ -24,7 +24,7 @@ describe('logMapper specs', () => {
     const requestContext: LogContext = fr.create('LogContext');
     const message: Message = fr.create('string');
 
-    const result = logMapper.map(message, 'knownAction', requestContext);
+    const result = logMapper.map(message, actions.action, requestContext);
 
     expect(result).toEqual({ message, meta: { action: knownAction, ...requestContext } });
   });
