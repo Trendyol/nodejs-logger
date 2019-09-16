@@ -7,11 +7,15 @@ export default class LogMapper {
     this.actions = actions;
   }
   public map(message: Message, action: string, requestContext?: LogContext): AdapterLog {
-    const actionName = this.actions[action];
-
+    const actionName = action;
     const mapResult: Detail = {
       action: actionName
     };
+
+    if (!Object.values(this.actions).some(name => name === actionName)) {
+      mapResult.action = UNKNOWN_ACTION;
+      mapResult.customAction = action;
+    }
 
     let mappedMessage = message;
 
@@ -22,11 +26,6 @@ export default class LogMapper {
       mapResult.refererUrl = requestContext.refererUrl;
       mapResult.correlationId = requestContext.correlationId;
       mapResult.userId = requestContext.userId;
-    }
-
-    if (!actionName) {
-      mapResult.action = UNKNOWN_ACTION;
-      mapResult.customAction = action;
     }
 
     if (typeof message !== 'string') {
