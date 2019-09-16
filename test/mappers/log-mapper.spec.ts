@@ -1,21 +1,32 @@
-import { mapLogDetail } from '../../src/mappers/log-mapper';
+import LogMapper from '../../src/mappers/log-mapper';
 import { LogContext, Message } from '../../src/types';
 import fr from 'fixture-repository';
-import { Action } from '../../src/actions/actions';
+import { UNKNOWN_ACTION } from '../../src/actions/actions';
+
+const knownAction = fr.create('string');
+
+const actions = {
+  knownAction
+};
 
 describe('logMapper specs', () => {
+  let logMapper: LogMapper;
+
+  beforeEach(() => {
+    logMapper = new LogMapper(actions);
+  });
+
   it('should create an instance of logMapper', () => {
-    expect(mapLogDetail).toBeDefined();
+    expect(logMapper).toBeDefined();
   });
 
   it('should map log properties correctly when action is not custom', () => {
     const requestContext: LogContext = fr.create('LogContext');
-    const action: Action = Action.FAVORITE_API_ADD_FAVORITE;
     const message: Message = fr.create('string');
 
-    const result = mapLogDetail(message, action, requestContext);
+    const result = logMapper.map(message, 'knownAction', requestContext);
 
-    expect(result).toEqual({ message, meta: { action, ...requestContext } });
+    expect(result).toEqual({ message, meta: { action: knownAction, ...requestContext } });
   });
 
   it('should map log properties correctly when action is custom', () => {
@@ -23,9 +34,9 @@ describe('logMapper specs', () => {
     const action: string = fr.create('string');
     const message: Message = fr.create('string');
 
-    const result = mapLogDetail(message, (action as unknown) as Action, requestContext);
+    const result = logMapper.map(message, action, requestContext);
 
-    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext } });
+    expect(result).toEqual({ message, meta: { customAction: action, action: UNKNOWN_ACTION, ...requestContext } });
   });
 
   it('should map log properties correctly when logContext undefined with object message', () => {
@@ -35,8 +46,8 @@ describe('logMapper specs', () => {
     };
     const stringMessage = JSON.stringify(message);
 
-    const result = mapLogDetail(message, (action as unknown) as Action);
+    const result = logMapper.map(message, action);
 
-    expect(result).toEqual({ message: stringMessage, meta: { customAction: action, action: Action.CUSTOM } });
+    expect(result).toEqual({ message: stringMessage, meta: { customAction: action, action: UNKNOWN_ACTION } });
   });
 });

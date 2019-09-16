@@ -1,6 +1,5 @@
 version: 2.1
 
-
 defaults: &defaults
   docker:
     - image: circleci/node:10
@@ -54,10 +53,24 @@ jobs:
       - run:
           name: Publish package
           command: npm publish
+  deploy-beta:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: List Workspace
+          command: ls
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+      - run:
+          name: Publish package
+          command: npm publish --tag beta
 
 workflows:
   version: 2
-  test-deploy:
+  master-deploy:
     jobs:
       - test:
           filters:
@@ -76,4 +89,22 @@ workflows:
           filters:
             branches:
               only: master
-
+  v2-deploy:
+    jobs:
+      - test:
+          filters:
+            tags:
+              only: /^v.*/
+      - hold:
+          type: approval
+          requires:
+            - test
+          filters:
+            branches:
+              only: v2
+      - deploy-beta:
+          requires:
+            - hold
+          filters:
+            branches:
+              only: v2

@@ -25,6 +25,7 @@ interface Adapter {
 
 interface LoggerProps {
   adapters: Adapter[];
+  actions: Action;
 }
 
 interface LogContext {
@@ -42,7 +43,7 @@ interface Request extends express.Request {
 }
 
 interface Detail extends LogContext {
-  action: Action;
+  action: string;
   customAction?: string;
 }
 

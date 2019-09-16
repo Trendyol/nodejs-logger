@@ -3,8 +3,7 @@ import { Adapter, GraylogConfig, LogContext, Detail, AdapterLog } from '../../sr
 import { GraylogAdapter } from '../../src/adapters/graylog-adapter';
 import fr from 'fixture-repository';
 import faker from 'faker';
-import { createSandbox, SinonStubbedInstance, SinonStub } from 'sinon';
-import * as mapper from '../../src/mappers/log-mapper';
+import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { Action } from '../../src/actions/actions';
 
 const adapterConfig: GraylogConfig = { ...fr.create('GraylogConfig'), port: faker.random.number({ min: 0, max: 100 }) };
@@ -12,27 +11,35 @@ const adapter: Adapter = new GraylogAdapter(adapterConfig);
 const sandbox = createSandbox();
 
 const requestContext: LogContext = fr.create('LogContext');
-const action: Action = fr.create('Action');
+const action: string = fr.create('string');
 const message: string = fr.create('string');
 const detail: Detail = fr.create('Detail');
-let mapperStub: SinonStub<unknown[]>;
 
 const log: AdapterLog = {
   message,
   meta: detail
 };
 
+const actions: Action = {};
+
+const mapperStub = sandbox.stub().returns(log);
+
+jest.mock('../../src/mappers/log-mapper', () => {
+  return jest.fn().mockImplementation(() => {
+    return { map: mapperStub };
+  });
+});
+
 describe('logger specs', () => {
   let logger: Logger;
   let mockAdapter: SinonStubbedInstance<Adapter>;
 
   beforeEach(() => {
-    mapperStub = sandbox.stub(mapper, 'mapLogDetail').returns(log);
     mockAdapter = sandbox.stub(adapter);
 
     mockAdapter.validate.returns(true);
 
-    logger = new Logger({ adapters: [mockAdapter] });
+    logger = new Logger({ actions, adapters: [mockAdapter] });
   });
 
   afterEach(() => {
