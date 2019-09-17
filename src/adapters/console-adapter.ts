@@ -18,7 +18,15 @@ class ConsoleAdapter implements Adapter {
   }
 
   public validate() {
-    return process.env.NODE_ENV !== 'production';
+    const isProduction = process.env.NODE_ENV === 'production';
+    const isConfigEnabled =
+      process.env.CONSOLE_LOG_ENABLED !== undefined && process.env.CONSOLE_LOG_ENABLED.toLowerCase() === 'true';
+
+    if (isProduction && !isConfigEnabled) {
+      return false;
+    }
+
+    return true;
   }
 }
 
