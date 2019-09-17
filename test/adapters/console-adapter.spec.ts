@@ -43,12 +43,11 @@ describe('console adapter specs', () => {
     });
   });
 
-  describe('with production env', () => {
-    const prevNodeEnv = process.env.NODE_ENV;
+  describe('with CONSOLE_LOG_ENABLED false', () => {
+    const prevConfig = process.env.CONSOLE_LOG_ENABLED;
     let adapter: Adapter;
 
     beforeEach(() => {
-      process.env.NODE_ENV = 'production';
       adapter = new ConsoleAdapter();
     });
 
@@ -57,10 +56,26 @@ describe('console adapter specs', () => {
     });
 
     afterEach(() => {
-      process.env.NODE_ENV = prevNodeEnv;
+      process.env.CONSOLE_LOG_ENABLED = prevConfig;
+    });
+
+    it('validate should return true', () => {
+      process.env.CONSOLE_LOG_ENABLED = 'true';
+
+      const result = adapter.validate();
+      expect(result).toBe(true);
     });
 
     it('validate should return false', () => {
+      process.env.CONSOLE_LOG_ENABLED = 'false';
+
+      const result = adapter.validate();
+      expect(result).toBe(false);
+    });
+
+    it('validate should return false when config is not enabled', () => {
+      delete process.env.CONSOLE_LOG_ENABLED;
+
       const result = adapter.validate();
       expect(result).toBe(false);
     });

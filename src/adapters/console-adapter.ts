@@ -18,7 +18,7 @@ class ConsoleAdapter implements Adapter {
   }
 
   public validate() {
-    return process.env.NODE_ENV !== 'production';
+    return process.env.CONSOLE_LOG_ENABLED !== undefined && process.env.CONSOLE_LOG_ENABLED.toLowerCase() === 'true';
   }
 }
 
