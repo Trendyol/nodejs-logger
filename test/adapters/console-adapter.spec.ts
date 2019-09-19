@@ -41,28 +41,10 @@ describe('console adapter specs', () => {
       adapter.debug(log);
       expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
     });
-  });
 
-  describe('with production env', () => {
-    const prevNodeEnv = process.env.NODE_ENV;
-    let adapter: Adapter;
-
-    beforeEach(() => {
-      process.env.NODE_ENV = 'production';
-      adapter = new ConsoleAdapter();
-    });
-
-    afterEach(() => {
-      sandbox.verifyAndRestore();
-    });
-
-    afterEach(() => {
-      process.env.NODE_ENV = prevNodeEnv;
-    });
-
-    it('validate should return false', () => {
+    it('validate should return true', () => {
       const result = adapter.validate();
-      expect(result).toBe(false);
+      expect(result).toBe(true);
     });
   });
 });

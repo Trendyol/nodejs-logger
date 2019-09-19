@@ -18,7 +18,8 @@ class ConsoleAdapter implements Adapter {
   }
 
   public validate() {
-    return process.env.NODE_ENV !== 'production';
+    // Console is always available
+    return true;
   }
 }
 
