@@ -6,7 +6,7 @@ const defaultOptions: ExpressLogContextMiddlewareOptions = {
   generateCorrelationId: false
 };
 
-const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions = defaultOptions) => {
+const expressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions = defaultOptions) => {
   return (req: Request, res: express.Response, next: express.NextFunction) => {
     req.logContext = {
       currentUrl: req.originalUrl,
@@ -33,4 +33,4 @@ const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions
   };
 };
 
-export { ExpressLogContextMiddleware };
+export { expressLogContextMiddleware };
