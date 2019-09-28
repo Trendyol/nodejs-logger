@@ -1,4 +1,4 @@
-import { ExpressLogContextMiddleware } from '../../src/middlewares/express-log-context-middleware';
+import { expressLogContextMiddleware } from '../../src/middlewares/express-log-context-middleware';
 import { random } from 'faker';
 import { createSandbox } from 'sinon';
 
@@ -18,7 +18,7 @@ describe('express context middleware specs', () => {
         id: random.number()
       }
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(spy.calledOnce).toBe(true);
@@ -36,7 +36,7 @@ describe('express context middleware specs', () => {
       originalUrl: random.word(),
       header: sandbox.stub().returnsArg(0)
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.userId).toBeUndefined();
@@ -53,7 +53,7 @@ describe('express context middleware specs', () => {
     const req: any = {
       header: headerName => headers[headerName]
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.ip).toBe(ip);
@@ -68,7 +68,7 @@ describe('express context middleware specs', () => {
     const req: any = {
       header: headerName => headers[headerName]
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.ip).toBe(ip);
@@ -83,7 +83,7 @@ describe('express context middleware specs', () => {
     const req: any = {
       header: headerName => headers[headerName]
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.ip).toBe(ip);
@@ -98,7 +98,7 @@ describe('express context middleware specs', () => {
     const req: any = {
       header: headerName => headers[headerName]
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.ip).toBe(ip);
@@ -111,7 +111,7 @@ describe('express context middleware specs', () => {
       ip,
       header: () => undefined
     };
-    const middleware = ExpressLogContextMiddleware();
+    const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
 
     expect(req.logContext.ip).toBe(req.ip);
@@ -127,7 +127,7 @@ describe('express context middleware specs', () => {
       header: () => undefined
     };
 
-    const middleware = ExpressLogContextMiddleware(middlewareOptions);
+    const middleware = expressLogContextMiddleware(middlewareOptions);
     middleware(req, {}, spy);
 
     expect(typeof req.logContext.correlationId).toBe('string');
