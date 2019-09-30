@@ -42,6 +42,23 @@ describe('express context middleware specs', () => {
     expect(req.logContext.userId).toBeUndefined();
   });
 
+  it('should create express context middleware with x-user-agent', () => {
+    const spy = sandbox.spy();
+    const userAgent = 'x-user-agent';
+
+    const headers = {
+      'x-user-agent': userAgent
+    };
+
+    const req: any = {
+      header: headerName => headers[headerName]
+    };
+    const middleware = expressLogContextMiddleware();
+    middleware(req, {}, spy);
+
+    expect(req.logContext.userAgent).toBe(userAgent);
+  });
+
   it('should create express context middleware with X-Client-IP', () => {
     const spy = sandbox.spy();
     const ip = 'X-Client-IP';

@@ -10,7 +10,7 @@ const expressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions
   return (req: Request, res: express.Response, next: express.NextFunction) => {
     req.logContext = {
       currentUrl: req.originalUrl,
-      userAgent: req.header('user-agent'),
+      userAgent: req.header('user-agent') || req.header('x-user-agent'),
       refererUrl: req.header('referer'),
       correlationId: req.header('x-correlation-id') || req.header('x-correlationid'),
       ip:
