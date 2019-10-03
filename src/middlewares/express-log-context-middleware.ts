@@ -21,10 +21,6 @@ const expressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions
         req.ip
     };
 
-    if (req.user) {
-      req.logContext.userId = req.user.id;
-    }
-
     if (options.generateCorrelationId && !req.logContext.correlationId) {
       req.logContext.correlationId = uuid();
     }
