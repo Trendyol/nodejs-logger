@@ -25,7 +25,6 @@ export default class LogMapper {
       mapResult.userAgent = requestContext.userAgent;
       mapResult.refererUrl = requestContext.refererUrl;
       mapResult.correlationId = requestContext.correlationId;
-      mapResult.userId = requestContext.userId;
     }
 
     if (typeof message !== 'string') {

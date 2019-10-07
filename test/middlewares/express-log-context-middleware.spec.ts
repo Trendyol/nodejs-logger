@@ -13,10 +13,7 @@ describe('express context middleware specs', () => {
     const spy = sandbox.spy();
     const req: any = {
       originalUrl: random.word(),
-      header: sandbox.stub().returnsArg(0),
-      user: {
-        id: random.number()
-      }
+      header: sandbox.stub().returnsArg(0)
     };
     const middleware = expressLogContextMiddleware();
     middleware(req, {}, spy);
@@ -27,19 +24,6 @@ describe('express context middleware specs', () => {
     expect(req.logContext.userAgent).toBe('user-agent');
     expect(req.logContext.refererUrl).toBe('referer');
     expect(req.logContext.correlationId).toBe('x-correlation-id');
-    expect(req.logContext.userId).toBe(req.user.id);
-  });
-
-  it('should create express context middleware without user info', () => {
-    const spy = sandbox.spy();
-    const req: any = {
-      originalUrl: random.word(),
-      header: sandbox.stub().returnsArg(0)
-    };
-    const middleware = expressLogContextMiddleware();
-    middleware(req, {}, spy);
-
-    expect(req.logContext.userId).toBeUndefined();
   });
 
   it('should create express context middleware with x-user-agent', () => {

@@ -30,7 +30,6 @@ interface LoggerProps {
 
 interface LogContext {
   currentUrl?: string;
-  userId?: string;
   ip?: string;
   userAgent?: string;
   correlationId?: string;
@@ -39,7 +38,6 @@ interface LogContext {
 
 interface Request extends express.Request {
   logContext: LogContext;
-  user?: any;
 }
 
 interface Detail extends LogContext {
