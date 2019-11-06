@@ -28,7 +28,7 @@ export default class LogMapper {
     }
 
     if (typeof message !== 'string') {
-      mappedMessage = JSON.stringify(message);
+      mappedMessage = JSON.stringify(message, null, 4);
     }
 
     return { meta: mapResult, message: mappedMessage };
