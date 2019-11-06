@@ -44,7 +44,7 @@ describe('logMapper specs', () => {
     const message: Message = {
       test: fr.create('string')
     };
-    const stringMessage = JSON.stringify(message);
+    const stringMessage = JSON.stringify(message, null, 4);
 
     const result = logMapper.map(message, action);
 
