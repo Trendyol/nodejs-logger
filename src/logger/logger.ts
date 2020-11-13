@@ -11,7 +11,8 @@ const logLevels: LevelMap = {
 class Logger {
   private adapters: Adapter[];
   private mapper: LogMapper;
-  constructor(props: LoggerProps) {
+
+  constructor(private props: LoggerProps) {
     this.adapters = props.adapters.filter(adapter => adapter.validate());
     this.mapper = new LogMapper(props.actions);
   }
@@ -41,7 +42,7 @@ class Logger {
   }
 
   private getLogLevel() {
-    const logLevelAsText = process.env.LOG_LEVEL || LogLevel.warn;
+    const logLevelAsText = this.props.logLevel || process.env.LOG_LEVEL || LogLevel.warn;
 
     let level: number = logLevels[logLevelAsText as LogLevel];
 

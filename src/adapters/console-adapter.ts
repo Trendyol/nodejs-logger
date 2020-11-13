@@ -1,6 +1,8 @@
-import { Adapter, AdapterLog } from '../types';
+import { Adapter, AdapterLog, ConsoleConfig } from '../types';
 
 class ConsoleAdapter implements Adapter {
+  constructor(private config?: ConsoleConfig) {}
+
   public info(log: AdapterLog) {
     console.info(log.message, log.meta);
   }
@@ -18,8 +20,7 @@ class ConsoleAdapter implements Adapter {
   }
 
   public validate() {
-    // Console is always available
-    return true;
+    return !(this.config && this.config.disabled);
   }
 }
 
