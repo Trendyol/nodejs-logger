@@ -9,6 +9,10 @@ interface GraylogConfig {
   bufferSize?: number;
 }
 
+interface ConsoleConfig {
+  disabled: boolean;
+}
+
 interface AdapterLog {
   message: string | object;
   meta: Detail;
@@ -26,6 +30,7 @@ interface Adapter {
 interface LoggerProps {
   adapters: Adapter[];
   actions: Action;
+  logLevel?: LogLevel;
 }
 
 interface LogContext {
@@ -62,6 +67,7 @@ interface ExpressLogContextMiddlewareOptions {
 
 export {
   GraylogConfig,
+  ConsoleConfig,
   Adapter,
   AdapterLog,
   LoggerProps,

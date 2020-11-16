@@ -34,7 +34,7 @@ class GraylogAdapter implements Adapter {
   }
 
   public validate() {
-    return this.config.facility && this.config.host && this.config.hostname && this.config.port ? true : false;
+    return !!(this.config.facility && this.config.host && this.config.hostname && this.config.port);
   }
 
   private setup() {
