@@ -1,5 +1,5 @@
 import { ExpressLogContextMiddleware } from '../../src/middlewares/express-log-context-middleware';
-import { random } from 'faker';
+import { random, lorem } from 'faker';
 import { createSandbox } from 'sinon';
 
 const sandbox = createSandbox();
@@ -16,6 +16,11 @@ describe('express context middleware specs', () => {
       header: sandbox.stub().returnsArg(0),
       user: {
         id: random.number()
+      },
+      query: {
+        storefrontId: random.number(),
+        language: lorem.word(),
+        culture: lorem.word()
       }
     };
     const middleware = ExpressLogContextMiddleware();
@@ -28,6 +33,9 @@ describe('express context middleware specs', () => {
     expect(req.logContext.refererUrl).toBe('referer');
     expect(req.logContext.correlationId).toBe('x-correlation-id');
     expect(req.logContext.userId).toBe(req.user.id);
+    expect(req.logContext.storefrontId).toBe(req.query.storefrontId);
+    expect(req.logContext.language).toBe(req.query.language);
+    expect(req.logContext.culture).toBe(req.query.culture);
   });
 
   it('should create express context middleware without user info', () => {

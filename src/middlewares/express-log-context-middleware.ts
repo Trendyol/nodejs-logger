@@ -8,6 +8,8 @@ const defaultOptions: ExpressLogContextMiddlewareOptions = {
 
 const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions = defaultOptions) => {
   return (req: Request, res: express.Response, next: express.NextFunction) => {
+    const { query } = req;
+
     req.logContext = {
       currentUrl: req.originalUrl,
       userAgent: req.header('user-agent'),
@@ -20,6 +22,18 @@ const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions
         req.header('x-real-ip') ||
         req.ip
     };
+
+    if (query && query.storefrontId) {
+      req.logContext.storefrontId = query.storefrontId;
+    }
+
+    if (query && query.language) {
+      req.logContext.language = query.language;
+    }
+
+    if (query && query.culture) {
+      req.logContext.culture = query.culture;
+    }
 
     if (req.user) {
       req.logContext.userId = req.user.id;
