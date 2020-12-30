@@ -2,23 +2,31 @@ import { Adapter, AdapterLog } from '../types';
 
 class ConsoleAdapter implements Adapter {
   public info(log: AdapterLog) {
-    console.info(log.message, log.meta);
+    console.info(ConsoleAdapter.mergeLog(log));
   }
 
   public error(log: AdapterLog) {
-    console.error(log.message, log.meta);
+    console.error(ConsoleAdapter.mergeLog(log));
   }
 
   public warn(log: AdapterLog) {
-    console.warn(log.message, log.meta);
+    console.warn(ConsoleAdapter.mergeLog(log));
   }
 
   public debug(log: AdapterLog) {
-    console.debug(log.message, log.meta);
+    console.debug(ConsoleAdapter.mergeLog(log));
+  }
+
+  public static mergeLog(log: AdapterLog) {
+    let message = log.message;
+    if (typeof message === 'string') {
+      message = { message };
+    }
+    return JSON.stringify({ ...message, ...log.meta });
   }
 
   public validate() {
-    return process.env.NODE_ENV !== 'production';
+    return process.env.DISABLE_CONSOLE_ERROR !== 'true';
   }
 }
 

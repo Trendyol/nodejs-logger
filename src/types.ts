@@ -34,6 +34,9 @@ interface LogContext {
   userAgent?: string;
   correlationId?: string;
   refererUrl?: string;
+  storefrontId?: string;
+  language?: string;
+  culture?: string;
 }
 
 interface Request extends express.Request {

@@ -8,8 +8,6 @@ const mapLogDetail = (message: Message, action: ActionType, requestContext?: Log
     action: actionName
   };
 
-  let mappedMessage = message;
-
   if (requestContext) {
     mapResult.currentUrl = requestContext.currentUrl;
     mapResult.ip = requestContext.ip;
@@ -17,6 +15,9 @@ const mapLogDetail = (message: Message, action: ActionType, requestContext?: Log
     mapResult.refererUrl = requestContext.refererUrl;
     mapResult.correlationId = requestContext.correlationId;
     mapResult.userId = requestContext.userId;
+    mapResult.storefrontId = requestContext.storefrontId;
+    mapResult.language = requestContext.language;
+    mapResult.culture = requestContext.culture;
   }
 
   if (!actionName) {
@@ -24,11 +25,7 @@ const mapLogDetail = (message: Message, action: ActionType, requestContext?: Log
     mapResult.customAction = action;
   }
 
-  if (typeof message !== 'string') {
-    mappedMessage = JSON.stringify(message);
-  }
-
-  return { meta: mapResult, message: mappedMessage };
+  return { message, meta: mapResult };
 };
 
 export { mapLogDetail };

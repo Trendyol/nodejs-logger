@@ -8,7 +8,7 @@ import fr from 'fixture-repository';
 const sandbox = createSandbox();
 
 const config: GraylogConfig = { ...fr.create('GraylogConfig'), port: random.number({ min: 0, max: 100 }) };
-const log: AdapterLog = { meta: fr.create('Detail'), message: {} };
+const log: AdapterLog = { meta: fr.create('Detail'), message: 'some message' };
 
 const adapter: Adapter = new GraylogAdapter(config);
 
@@ -29,6 +29,13 @@ describe('graylog adapter specs', () => {
     const stub = sandbox.stub(graylog.prototype, 'info');
     adapter.info(log);
     expect(stub.calledWithExactly(log.message, log.meta)).toBe(true);
+  });
+
+  it('should send info log with stringify message', () => {
+    const stub = sandbox.stub(graylog.prototype, 'info');
+    const sampleLog: AdapterLog = { meta: fr.create('Detail'), message: { data: 'some data' } };
+    adapter.info(sampleLog);
+    expect(stub.calledWithExactly(JSON.stringify(sampleLog.message), sampleLog.meta)).toBe(true);
   });
 
   it('should send error log', () => {
