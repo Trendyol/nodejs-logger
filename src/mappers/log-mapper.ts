@@ -21,8 +21,7 @@ const mapLogDetail = (message: Message, action: ActionType, requestContext?: Log
   }
 
   if (!actionName) {
-    mapResult.action = Action.CUSTOM;
-    mapResult.customAction = action;
+    mapResult.action = action as Action;
   }
 
   return { message, meta: mapResult };

@@ -25,7 +25,7 @@ describe('logMapper specs', () => {
 
     const result = mapLogDetail(message, (action as unknown) as Action, requestContext);
 
-    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM, ...requestContext } });
+    expect(result).toEqual({ message, meta: { action: action, ...requestContext } });
   });
 
   it('should map log properties correctly when logContext undefined with object message', () => {
@@ -36,6 +36,6 @@ describe('logMapper specs', () => {
 
     const result = mapLogDetail(message, (action as unknown) as Action);
 
-    expect(result).toEqual({ message, meta: { customAction: action, action: Action.CUSTOM } });
+    expect(result).toEqual({ message, meta: { action: action } });
   });
 });
