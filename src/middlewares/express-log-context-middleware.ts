@@ -16,6 +16,7 @@ const ExpressLogContextMiddleware = (options: ExpressLogContextMiddlewareOptions
       refererUrl: req.header('referer'),
       correlationId: req.header('x-correlation-id') || req.header('x-correlationid'),
       ip:
+        req.header('True-Client-IP') || 
         req.header('X-Client-IP') ||
         req.header('CF-Connecting-IP') ||
         req.header('Client-IP') ||

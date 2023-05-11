@@ -125,6 +125,21 @@ describe('express context middleware specs', () => {
     expect(req.logContext.ip).toBe(req.ip);
   });
 
+  it('should create express context middleware with True-Client-IP', () => {
+    const spy = sandbox.spy();
+    const ip = 'True-Client-IP';
+    const headers = {
+      'True-Client-IP': ip
+    };
+    const req: any = {
+      header: headerName => headers[headerName]
+    };
+    const middleware = ExpressLogContextMiddleware();
+    middleware(req, {}, spy);
+
+    expect(req.logContext.ip).toBe(ip);
+  });
+
   it('should create express context middleware with random correlationId', () => {
     const spy = sandbox.spy();
     const middlewareOptions = {
