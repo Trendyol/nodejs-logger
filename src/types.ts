@@ -25,6 +25,7 @@ interface Adapter {
 
 interface LoggerProps {
   adapters: Adapter[];
+  isDoubleStringifyEnabled?: boolean;
 }
 
 interface LogContext {
